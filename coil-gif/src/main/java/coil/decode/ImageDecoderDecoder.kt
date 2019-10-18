@@ -41,7 +41,7 @@ class ImageDecoderDecoder : Decoder {
             var isSampled = false
 
             // Work around https://issuetracker.google.com/issues/139371066 by copying the source to a temp file.
-            source.use { tempFile.sink().use { source.readAll(it) } }
+            source.use { tempFile.sink().use(source::readAll) }
             val decoderSource = ImageDecoder.createSource(tempFile)
 
             val drawable = decoderSource.decodeDrawable { info, _ ->
